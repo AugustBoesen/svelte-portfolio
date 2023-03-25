@@ -20,11 +20,11 @@
 		rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	/>
-	<link rel="stylesheet" href="/src/styles.css" />
+	<link rel="stylesheet" href="./styles.css" />
 </svelte:head>
 
 <body>
-	<img src="/src/img/pfp.jpg" alt="pfp" width="120em" />
+	<img src="./img/pfp.jpg" alt="pfp" width="120em" />
 	<Greeting />
 	<h2>My name is <b>Severi Boesen</b>.</h2>
 	<h2>
