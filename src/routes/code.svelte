@@ -1,6 +1,6 @@
 <script>
 	import { timer, time, isRunning, isComplete } from './countdown-timer.js';
-	import Countdown from './Countdown.svelte';
+	import Countdown from './countdown.svelte';
 	import { scale } from 'svelte/transition';
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * max);

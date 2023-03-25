@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const COUNTDOWN_FROM = 10 * 1000;
+const COUNTDOWN_FROM = 20 * 1000;
 
 //Formatointi
 const formatter = new Intl.DateTimeFormat('en', {
