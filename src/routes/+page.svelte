@@ -2,6 +2,7 @@
 	import Greeting from './greeting.svelte'; //Ottaa vuorokaudenajat huomioon
 	import Code from './code.svelte'; //Code.svelte sisältää matikkapelin runkoineen
 	import Footer from './footer.svelte'; //Täältä tulee footerin yhteystiedot
+	import Api from './api.svelte';
 
 	let musicurl = 'https://youtu.be/gJbARDlePDU';
 	let eventurl = 'https://blush.lifebeyond.fi/';
@@ -14,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<!-- Paras fontti ikinä -->
+	<!-- Sivun fontti -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
 
 	<!-- Ikonit footerin some-linkeille -->
@@ -23,7 +24,7 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	/>
 
-	<!-- Erillinen pää-CSS, koska muuten tämä tiedosto olisi ihan liian pitkä -->
+	<!-- Erillinen pää-CSS, koska muuten tämä tiedosto olisi aivan liian pitkä -->
 	<link rel="stylesheet" href="./styles.css" />
 </svelte:head>
 
@@ -31,7 +32,7 @@
 	<img src="./img/pfp.jpg" alt="pfp" width="120em" />
 	<Greeting />
 
-	<!-- SIVUN TEKSTIT -->
+	<!-- SIVUN PÄÄTEKSTIT -->
 	<h2>My name is <b>Severi Boesen</b>.</h2>
 	<h2>
 		I'm a <b>PRODUCER</b> of
@@ -43,7 +44,7 @@
 		</button>.
 	</h2>
 
-	<!-- Tekstit ovat näkyvissä lähtökohtaisesti ja vaihtavat paikkaa pelin kanssa code-tekstiä klikatessa -->
+	<!-- Flavor-tekstit ovat näkyvissä lähtökohtaisesti ja vaihtavat paikkaa pelin kanssa code-tekstiä klikatessa -->
 	{#if visible}
 		<p>Click on the <b>keywords</b> above to see or hear for yourself.</p>
 		<br />
@@ -64,6 +65,8 @@
 		<p>Interested in details? Contact information can be found at the bottom of this page.</p>
 		<br />
 		<p>Drop a message & let's get in touch!</p>
+		<br />
+		<i class="secretapi"><Api /></i>
 	{/if}
 
 	<!-- CODE-"painiketta" klikkaamalla visible-bool vaihtuu -->
