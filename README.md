@@ -6,6 +6,12 @@ This is a personal portfolio site, made with Svelte. It was made for a school pu
 
 The website is a single-page website with compact information about myself and a small demonstrative math-based game.
 
-## Sources
+## Sources, tools & tutorials used
 
-Everything else was made from scratch with Svelte by yours truly, excluding a countdown timer mechanic used in the game: https://codesandbox.io/s/ceo2u
+Roughly 40% of initial templates and guidance for app code structure from Svelte tutorials: https://svelte.dev/tutorial/basics
+
+A base for the countdown timer: https://codesandbox.io/s/ceo2u
+
+CSS gradient picker: https://cssgradient.io/
+
+CSS shadows: https://getcssscan.com/css-box-shadow-examples
