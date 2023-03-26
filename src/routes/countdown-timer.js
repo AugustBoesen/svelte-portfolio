@@ -1,6 +1,12 @@
+// Codesandbox.io:sta löytyvään countdown timer-koodiin perustuva laskuri. Yksinkertaistettu ja käyttötarkoitukseen mukautettu.
+// Englannista poikkean koodin arvoissa siksi, että tätä oli aluksi hyvin hankala ymmärtää :D
+
 import { writable } from 'svelte/store';
 
-const COUNTDOWN_FROM = 20 * 1000;
+//Tämän muuttaminen riittää, jos haluaa enemmän tai vähemmän sekunteja peliin
+let sekunteja = 20;
+
+const laskettuAika = sekunteja * 1000;
 
 //Formatointi
 const formatter = new Intl.DateTimeFormat('en', {
@@ -9,58 +15,49 @@ const formatter = new Intl.DateTimeFormat('en', {
 	second: '2-digit'
 });
 
-export const time = writable(formatter.format(COUNTDOWN_FROM));
-export const isRunning = writable(false);
-export const isComplete = writable(false);
+// kirjoitettavat arvot, joiden avulla katsotaan aikaa, onko peli käynnissä sekä onko peli ohi
+export const aika = writable(formatter.format(laskettuAika));
+export const onkoKaynnissa = writable(false);
+export const onkoValmis = writable(false);
 
+// Luodaan laskuri
 const createTimer = () => {
-	let animationRef;
-	let latestStartTime;
-	let remainingTime = COUNTDOWN_FROM;
+	let animRef;
+	let uusinKayntiAika;
+	let aikaaJaljella = laskettuAika;
 
-	const animate = (timestamp) => {
-		// Onko ensimmäinen
-		if (latestStartTime === undefined) {
-			// make a note of the start time
-			latestStartTime = timestamp + remainingTime;
+	const animate = (aikaleima) => {
+		// Onko ensimmäinen stamppi?
+		if (uusinKayntiAika === undefined) {
+			// Ottaa aloitusajan ylös
+			uusinKayntiAika = aikaleima + aikaaJaljella;
 		}
-		console.log(timestamp, latestStartTime);
+		console.log(aikaleima, uusinKayntiAika);
 
-		// the time to display now
-		const currentTime = latestStartTime - timestamp;
-		if (currentTime <= 0) {
-			cancelAnimationFrame(animationRef);
-			time.set(formatter.format(0));
-			isRunning.set(false);
-			isComplete.set(true);
+		// Ajannäyttö
+		const nykyinenAika = uusinKayntiAika - aikaleima;
+		if (nykyinenAika <= 0) {
+			cancelAnimationFrame(animRef);
+			aika.set(formatter.format(0));
+			onkoKaynnissa.set(false);
+			onkoValmis.set(true);
 			return;
 		}
-		time.set(formatter.format(currentTime));
+		aika.set(formatter.format(nykyinenAika));
 
-		// keep animating recursively
-		animationRef = requestAnimationFrame(animate);
+		// Rekursiivinen animointi, liikutaan kunnes ei tarvitse
+		animRef = requestAnimationFrame(animate);
 	};
 
+	// Käynnistysnappula
 	const api = {
 		start: () => {
-			isRunning.set(true);
-			animationRef = requestAnimationFrame(animate);
-		},
-
-		pause: () => {
-			cancelAnimationFrame(animationRef);
-			if (latestStartTime !== undefined) {
-				// prepare for the next cycle
-				remainingTime = latestStartTime - performance.now();
-				latestStartTime = undefined;
-			}
-			isRunning.set(false);
+			onkoKaynnissa.set(true);
+			animRef = requestAnimationFrame(animate);
 		}
-
-		// reset: Function.prototype
 	};
 
 	return api;
 };
 
-export const timer = createTimer();
+export const laskuri = createTimer();

@@ -1,19 +1,24 @@
 <script>
-	import { timer, time, isRunning, isComplete } from './countdown-timer.js';
+	import { onkoKaynnissa, onkoValmis } from './countdown-timer.js';
 	import Countdown from './countdown.svelte';
 	import { scale } from 'svelte/transition';
+
+	// Numeroiden randomisointifunktio. 0 jätetään pois ja vaikeutta voi muuttaa max-arvolla
 	function getRandomInt(max) {
-		return Math.floor(Math.random() * max);
+		return Math.floor(Math.random() * max) + 1;
 	}
 
+	// Randomisoitavat numeroarvot x ja y
 	let x = getRandomInt(10);
 	let y = getRandomInt(10);
+
+	// Loput tarvittavista arvoista
 	let vastaus = x * y;
 	let arvaus = '';
 	let ratkaistut = [' | '];
-
 	let pisteet = 0;
 
+	// Vastauksen tarkistusfunktio, joka arpoo samalla uudet x:n ja y:n sekä puskee vastauksia ratkaistut-taulukkoon
 	function tarkista() {
 		if (arvaus == vastaus) {
 			console.log('oikein');
@@ -33,22 +38,25 @@
 </script>
 
 <main>
-	{#if $isRunning}
+	<!-- Näkymä pelissä -->
+	{#if $onkoKaynnissa}
 		<h2>
 			{x} * {y} =
-			<input bind:value={arvaus} type="text" placeholder="vastaus..." on:keydown={tarkista} />
+			<input bind:value={arvaus} type="number" placeholder="vastaus..." on:keydown={tarkista} />
 		</h2>
 		<button on:click={tarkista}>Check</button>
 		<h2>Points: {pisteet}</h2>
 	{/if}
-	{#if !$isRunning}
-		<h1 in:scale>Quick Maths</h1>
 
+	<!-- Aloitusnäkymä -->
+	{#if !$onkoKaynnissa}
+		<h1 in:scale>Quick Maths</h1>
 		<i in:scale>Solve as many as quickly as you can!</i>
 		<br />
 	{/if}
 
-	{#if $isComplete}
+	<!-- Loppunäkymä, each-lohkoa käytetty -->
+	{#if $onkoValmis}
 		<h2>You got {pisteet} right!</h2>
 		<i>Press F5 to to try again.</i>
 		<br />
