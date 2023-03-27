@@ -9,9 +9,11 @@ The website is a single-page website with compact information about myself and a
 
 ## Sources, tools & tutorials used
 
-Roughly 40% of initial templates and guidance for app code structure from Svelte tutorials: https://svelte.dev/tutorial/basics
+Most initial templating and guidance for app code structure from Svelte tutorials: https://svelte.dev/tutorial/basics
 
 A base for the countdown timer: https://codesandbox.io/s/ceo2u
+
+A base for the greeter script: https://daily-dev-tips.com/posts/vanilla-javascript-time-of-day-greeting/
 
 CSS gradient picker: https://cssgradient.io/
 
