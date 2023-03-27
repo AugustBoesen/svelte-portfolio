@@ -1,4 +1,5 @@
 # Portfolio site made with Svelte
+## Severi Boesen | AD 1871
 
 This is a personal portfolio site, made with Svelte. It was made for a school purposes demonstrating various Svelte features.
 
